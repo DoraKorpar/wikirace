@@ -6,15 +6,7 @@ $(document).ready(function() {
 		});
 });
 
-socket.emit('join', {room: room});
-
-// grabs inputs from textfields
-function words()
-{
-	var word1 = document.getElementById("word1");
-	var word2 = document.getElementById("word2");
-	console.log("input");
-}
+// socket.emit('join', {room: room});
 
 // generates custom id for every request
 function makeid() {
@@ -25,11 +17,29 @@ function makeid() {
 	return text;
 }
 
-function 
-
+// generating variables for json passed to backend
+var submit_button = documentgetElementById("submit");
+var word1 = document.getElementById("word1");
+var word2 = document.getElementById("word2");
 var gen_id = makeid();
-var json = {
-	"word1": word1,
-	"word2": word2,
+
+var data = {
+	"word_1": word1,
+	"word_2": word2,
 	"id": gen_id
 }
+
+// emits json to backend
+submit_button.addEventListeneer("click", function(event) {
+	socket.emit(data)
+});
+
+socket.on('loaded', function() {
+	document.getElementById("loading") = "Generating connections"
+});
+
+socket.on('done', function() {
+
+});
+
+
